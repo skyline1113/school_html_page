@@ -1,37 +1,188 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>main</title>
-<style type="text/css">
-body {
-	background-color: #71CFD1;
-}
-</style>
+  <title>陈俊宏的个人主页</title>
+  <meta charset="utf-8">
+  <link rel="icon" href="./image/ToK_Link_Artwork.png" type="image/x-icon">
+    <style>
+        .main
+        {
+          background-color: #be6931;
+          margin: 0px;
+          height: 1000px;
+          position: relative;
+        }
+        #box {
+            width: 100px;
+            height: 100px;
+            /* background-color: red; */
+            position: relative;
+        }
+
+        .introduction
+        {
+          background-color: rgb(85, 51, 6);
+          height: 200px;
+          
+          font-weight: bold;
+          color: #fff;;
+          text-align: center;
+        }
+        .obstacle {
+            width: 98px;
+            height: 98px;
+            position: absolute;
+        }
+
+        .obstacle1 {
+            top: 300px;
+            left: 400px;
+            /* background-color:#00ccaa; */
+        }
+
+        .obstacle2 {
+            top: 0px;
+            left: 500px;
+            /* background-color:#0000ff; */
+          }
+          
+          .obstacle3 {
+            top: 200px;
+            left: 800px;
+            /* background-color:#a000af; */
+        }
+          .obstacle4 {
+            top: 300px;
+            left: 0px;
+            /* background-color:#cc7a33; */
+        }
+          .obstacle5 {
+            top: 100px;
+            left: 1200px;
+            /* background-color:#cc7a33; */
+        }
+        .name
+        {
+          text-align: center;
+          font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-<table width="200" border="1" cellspacing="10" cellpadding="10">
-  <tbody>
-    <tr>
-      <th scope="col">sky library</th>
-    </tr>
-    <tr>
-      <td><a href="web/author.html" title="author">about author</a></td>
-    </tr>
-	<tr>
-      <td><a href="web/cute_cat.html">to lovely cat page</a></td>
-    </tr>
-    <tr>
-      <td><a href="web/space.html">space</a></td>
-    </tr>
-    <tr>
-      <td><a href="web/meme.html">meme</a></td>
-    </tr>
-    <tr>
-      <td><a href="web/anime.html">anime</a></td>
-    </tr>
-  </tbody>
-</table>
+    <div class="introduction">
+      <span style="font-size: 70px;">你进入了陈俊宏的家<br></span>
+      <span style="font-size: 30px;">请使用键盘的方向键移动，走到对应的位置触发事件 <br></span>
+      <span style="font-size: 20px;"><br>一样，你懒的话一样可以直接击点图案，以传送至对应的页面</span>
+      
 
+    </div>
+    <div class="main">
+      <div id="box"><img src="./picture/ToK_Link_Artwork.png" alt="勇者" width="100%"></div>
+      <a href="./web/cute_cat.html">
+        <div class="obstacle obstacle1">
+          <img src="./picture/cartoon_cat.png" alt="" width="90%">
+          <div class="name" >可爱的猫咪</div>
+        </div>
+      </a>
+
+      <a href="./web/author.html">
+        <div class="obstacle obstacle2">
+          <img src="./picture/cartoon_book.png" alt="" width="100%">
+          <div class="name">一本写着个人介绍的书</div>
+        </div>
+      </a>
+
+      <a href="./web/space.html">
+      <div class="obstacle obstacle3">
+        <img src="./picture/cartoon_rocket.png" alt="" width="100%">
+        <div class="name">火箭玩具</div>
+      </div>
+      </a>
+      <a href="https://skyline1113.github.io/school_room_page/">
+        <div class="obstacle obstacle4">
+          <img src="./picture/cartoon_door.png" alt="返回主页" width="100%">
+          <div class="name">你从进来的</div>
+        </div>
+      </a>
+      <a href="./web/meme.html">
+        <div class="obstacle obstacle5">
+          <img src="./picture/sword_in_rock.png" alt="" width="100%">
+          <div class="name">插在石中的勇者之剑</div>
+        </div>
+      </a>
+
+      <script>
+          var box = document.getElementById('box');
+          var obstacles = document.querySelectorAll('.obstacle');
+          var step = 100; // 移动的步长
+
+          document.addEventListener('keydown', function(event) {
+              var left = box.offsetLeft;
+              var top = box.offsetTop;
+              switch(event.keyCode) {
+                  case 37: // 左箭头
+                    if (left>0)
+                    {
+                      box.style.left = (left - step) + 'px';
+                    }
+                      break;
+                  case 38: // 上箭头
+                    if (top>0)
+                    {
+                      box.style.top = (top - step) + 'px';
+                    }
+                    break;
+                  case 39: // 右箭头
+                  if (left<1200)
+                  {
+                    box.style.left = (left + step) + 'px';
+                  }
+                      break;
+                  case 40: // 下箭头
+                  if (top <=900)
+                  {
+                    box.style.top =  (box.offsetTop + step) + 'px';
+                  }
+                      break;
+              }
+              // 检查盒子与障碍物是否碰撞
+              for (var i = 0; i < obstacles.length; i++) {
+                  if (isColliding(box, obstacles[i])) {
+                      var url = ''; // 设置障碍物对应的超链接URL
+                      switch(i) {
+                          case 0:
+                              url = './web/cute_cat.html';
+                              break;
+                          case 1:
+                              url = './web/author.html';
+                              break;
+                          case 2:
+                              url = './web/space.html';
+                              break;
+                          case 3:
+                              url = 'https://skyline1113.github.io/school_room_page/';
+                              break;
+                          case 4:
+                              url = './web/meme.html'
+                      }
+                      window.location.href = url;
+                  }
+              }
+          });
+
+          function isColliding(element1, element2) {
+              var rect1 = element1.getBoundingClientRect();
+              var rect2 = element2.getBoundingClientRect();
+
+              return !(
+                  rect1.right <= rect2.left ||
+                  rect1.left >= rect2.right ||
+                  rect1.bottom <= rect2.top ||
+                  rect1.top >= rect2.bottom
+              );
+          }
+          
+      </script>
+    </div>
 </body>
 </html>
